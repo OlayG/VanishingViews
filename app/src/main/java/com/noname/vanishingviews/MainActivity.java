@@ -31,18 +31,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Start", Toast.LENGTH_SHORT).show();
         }
 
-        private void toggleVisible(final int index, final boolean visible) {
-            new Handler(MainActivity.this.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    if (!visible)
-                        root.getChildAt(index).setVisibility(View.INVISIBLE);
-                    else
-                        root.getChildAt(index).setVisibility(View.VISIBLE);
-                }
-            });
-        }
-
         @Override
         protected Void doInBackground(Void... voids) {
             int count = 0;
@@ -67,6 +55,17 @@ public class MainActivity extends AppCompatActivity {
             toggleVisible(index, true);
         }
 
+        private void toggleVisible(final int index, final boolean visible) {
+            new Handler(MainActivity.this.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    if (visible)
+                        root.getChildAt(index).setVisibility(View.VISIBLE);
+                    else
+                        root.getChildAt(index).setVisibility(View.INVISIBLE);
+                }
+            });
+        }
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
